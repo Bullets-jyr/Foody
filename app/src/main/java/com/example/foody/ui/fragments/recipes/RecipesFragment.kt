@@ -1,4 +1,4 @@
-package com.example.foody
+package com.example.foody.ui.fragments.recipes
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -16,7 +16,7 @@ class RecipesFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        binding = FragmentRecipesBinding.inflate(inflater)
+        binding = FragmentRecipesBinding.inflate(inflater, container, false)
 
         binding.recyclerView.showShimmer()
 
