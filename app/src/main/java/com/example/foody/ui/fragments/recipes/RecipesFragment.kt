@@ -23,10 +23,13 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class RecipesFragment : Fragment() {
 
+//    lateinit var binding: FragmentRecipesBinding
+    private var _binding: FragmentRecipesBinding? = null
+    private val binding get() = _binding!!
+
     private lateinit var mainViewModel: MainViewModel
     private lateinit var recipesViewModel: RecipesViewModel
     private val mAdapter by lazy { RecipesAdapter() }
-    lateinit var binding: FragmentRecipesBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,7 +42,10 @@ class RecipesFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        binding = FragmentRecipesBinding.inflate(inflater, container, false)
+//        binding = FragmentRecipesBinding.inflate(inflater, container, false)
+        _binding = FragmentRecipesBinding.inflate(inflater, container, false)
+        binding.lifecycleOwner = this
+        binding.mainViewModel = mainViewModel
 
 //        binding.recyclerView.showShimmer()
 
@@ -127,5 +133,10 @@ class RecipesFragment : Fragment() {
 
     private fun hideShimmerEffect() {
         binding.recyclerView.hideShimmer()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 }
