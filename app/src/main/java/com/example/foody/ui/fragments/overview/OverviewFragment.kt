@@ -10,6 +10,7 @@ import coil.load
 import com.example.foody.R
 import com.example.foody.databinding.FragmentOverviewBinding
 import com.example.foody.models.Result
+import org.jsoup.Jsoup
 
 class OverviewFragment : Fragment() {
 
@@ -31,7 +32,11 @@ class OverviewFragment : Fragment() {
         binding.titleTextView.text = myBundle?.title
         binding.likesTextView.text = myBundle?.aggregateLikes.toString()
         binding.timeTextView.text = myBundle?.readyInMinutes.toString()
-        binding.summaryTextView.text = myBundle?.summary
+//        binding.summaryTextView.text = myBundle?.summary
+        myBundle?.summary.let {
+            val summary = Jsoup.parse(it).text()
+            binding.summaryTextView.text = summary
+        }
 
         if(myBundle?.vegetarian == true){
             binding.vegetarianImageView.setColorFilter(ContextCompat.getColor(requireContext(), R.color.green))
