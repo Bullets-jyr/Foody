@@ -17,6 +17,10 @@ class FavoriteRecipesAdapter(
     private val requireActivity: FragmentActivity,
 ) : RecyclerView.Adapter<FavoriteRecipesAdapter.MyViewHolder>(), ActionMode.Callback {
 
+    private var multiSelection = false
+
+    private var selectedRecipes = arrayListOf<FavoritesEntity>()
+    private var myViewHolders = arrayListOf<MyViewHolder>()
     private var favoriteRecipes = emptyList<FavoritesEntity>()
 
     class MyViewHolder(private val binding: FavoriteRecipesRowLayoutBinding) :
@@ -42,28 +46,82 @@ class FavoriteRecipesAdapter(
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        val selectedRecipe = favoriteRecipes[position]
-        holder.bind(selectedRecipe)
+        myViewHolders.add(holder)
+
+        val currentRecipe = favoriteRecipes[position]
+        holder.bind(currentRecipe)
 
         /**
          * Single Click Listener
          * */
         holder.itemView.favoriteRecipesRowLayout.setOnClickListener {
-            val action =
-                FavoriteRecipesFragmentDirections.actionFavoriteRecipesFragmentToDetailsActivity(
-                    selectedRecipe.result
-                )
-            holder.itemView.findNavController().navigate(action)
+//            val action =
+//                FavoriteRecipesFragmentDirections.actionFavoriteRecipesFragmentToDetailsActivity(
+//                    selectedRecipe.result
+//                )
+//            holder.itemView.findNavController().navigate(action)
+            if (multiSelection) {
+                applySelection(holder, currentRecipe)
+            } else {
+                val action =
+                    FavoriteRecipesFragmentDirections.actionFavoriteRecipesFragmentToDetailsActivity(
+                        currentRecipe.result
+                    )
+                holder.itemView.findNavController().navigate(action)
+            }
         }
 
         /**
          * Long Click Listener
          * */
         holder.itemView.favoriteRecipesRowLayout.setOnLongClickListener {
-            requireActivity.startActionMode(this)
-            true
+//            requireActivity.startActionMode(this)
+//            true
+            if (!multiSelection) {
+                multiSelection = true
+                requireActivity.startActionMode(this)
+                applySelection(holder, currentRecipe)
+                true
+            } else {
+                multiSelection = false
+                false
+            }
         }
     }
+
+    private fun applySelection(holder: MyViewHolder, currentRecipe: FavoritesEntity) {
+        if (selectedRecipes.contains(currentRecipe)) {
+            selectedRecipes.remove(currentRecipe)
+            changeRecipeStyle(holder, R.color.cardBackgroundColor, R.color.strokeColor)
+//            applyActionModeTitle()
+        } else {
+            selectedRecipes.add(currentRecipe)
+            changeRecipeStyle(holder, R.color.cardBackgroundLightColor, R.color.colorPrimary)
+//            applyActionModeTitle()
+        }
+    }
+
+    private fun changeRecipeStyle(holder: MyViewHolder, backgroundColor: Int, strokeColor: Int) {
+        holder.itemView.favoriteRecipesRowLayout.setBackgroundColor(
+            ContextCompat.getColor(requireActivity, backgroundColor)
+        )
+        holder.itemView.favorite_row_cardView.strokeColor =
+            ContextCompat.getColor(requireActivity, strokeColor)
+    }
+
+//    private fun applyActionModeTitle() {
+//        when (selectedRecipes.size) {
+//            0 -> {
+//                mActionMode.finish()
+//            }
+//            1 -> {
+//                mActionMode.title = "${selectedRecipes.size} item selected"
+//            }
+//            else -> {
+//                mActionMode.title = "${selectedRecipes.size} items selected"
+//            }
+//        }
+//    }
 
     override fun getItemCount(): Int {
         return favoriteRecipes.size
@@ -95,11 +153,11 @@ class FavoriteRecipesAdapter(
     }
 
     override fun onDestroyActionMode(actionMode: ActionMode?) {
-//        myViewHolders.forEach { holder ->
-//            changeRecipeStyle(holder, R.color.cardBackgroundColor, R.color.strokeColor)
-//        }
-//        multiSelection = false
-//        selectedRecipes.clear()
+        myViewHolders.forEach { holder ->
+            changeRecipeStyle(holder, R.color.cardBackgroundColor, R.color.strokeColor)
+        }
+        multiSelection = false
+        selectedRecipes.clear()
         applyStatusBarColor(R.color.statusBarColor)
     }
 
