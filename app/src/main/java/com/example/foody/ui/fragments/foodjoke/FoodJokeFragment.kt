@@ -24,7 +24,7 @@ class FoodJokeFragment : Fragment() {
     private var _binding: FragmentFoodJokeBinding? = null
     private val binding get() = _binding!!
 
-//    private var foodJoke = "No Food Joke"
+    private var foodJoke = "No Food Joke"
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,16 +34,16 @@ class FoodJokeFragment : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
         binding.mainViewModel = mainViewModel
 
-//        setHasOptionsMenu(true)
+        setHasOptionsMenu(true)
 
         mainViewModel.getFoodJoke(API_KEY)
         mainViewModel.foodJokeResponse.observe(viewLifecycleOwner, { response ->
             when (response) {
                 is NetworkResult.Success -> {
                     binding.foodJokeTextView.text = response.data?.text
-//                    if (response.data != null) {
-//                        foodJoke = response.data.text
-//                    }
+                    if (response.data != null) {
+                        foodJoke = response.data.text
+                    }
                 }
                 is NetworkResult.Error -> {
                     loadDataFromCache()
@@ -62,28 +62,28 @@ class FoodJokeFragment : Fragment() {
         return binding.root
     }
 
-//    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-//        inflater.inflate(R.menu.food_joke_menu, menu)
-//    }
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.food_joke_menu, menu)
+    }
 
-//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-//        if(item.itemId == R.id.share_food_joke_menu){
-//            val shareIntent = Intent().apply {
-//                this.action = Intent.ACTION_SEND
-//                this.putExtra(Intent.EXTRA_TEXT, foodJoke)
-//                this.type = "text/plain"
-//            }
-//            startActivity(shareIntent)
-//        }
-//        return super.onOptionsItemSelected(item)
-//    }
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.share_food_joke_menu) {
+            val shareIntent = Intent().apply {
+                this.action = Intent.ACTION_SEND
+                this.putExtra(Intent.EXTRA_TEXT, foodJoke)
+                this.type = "text/plain"
+            }
+            startActivity(shareIntent)
+        }
+        return super.onOptionsItemSelected(item)
+    }
 
     private fun loadDataFromCache() {
         lifecycleScope.launch {
             mainViewModel.readFoodJoke.observe(viewLifecycleOwner, { database->
                 if (!database.isNullOrEmpty()) {
                     binding.foodJokeTextView.text = database[0].foodJoke.text
-//                    foodJoke = database[0].foodJoke.text
+                    foodJoke = database[0].foodJoke.text
                 }
             })
         }

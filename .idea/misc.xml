@@ -27,6 +27,7 @@
         <entry key="app/src/main/res/menu/details_menu.xml" value="0.45" />
         <entry key="app/src/main/res/menu/favorite_recipes_menu.xml" value="0.45" />
         <entry key="app/src/main/res/menu/favorites_contextual_menu.xml" value="0.335" />
+        <entry key="app/src/main/res/menu/food_joke_menu.xml" value="0.6638888888888889" />
         <entry key="app/src/main/res/menu/recipes_menu.xml" value="0.3848958333333333" />
       </map>
     </option>
