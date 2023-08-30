@@ -19,6 +19,8 @@ class FavoriteRecipesAdapter(
 
     private var multiSelection = false
 
+    private lateinit var mActionMode: ActionMode
+
     private var selectedRecipes = arrayListOf<FavoritesEntity>()
     private var myViewHolders = arrayListOf<MyViewHolder>()
     private var favoriteRecipes = emptyList<FavoritesEntity>()
@@ -93,11 +95,11 @@ class FavoriteRecipesAdapter(
         if (selectedRecipes.contains(currentRecipe)) {
             selectedRecipes.remove(currentRecipe)
             changeRecipeStyle(holder, R.color.cardBackgroundColor, R.color.strokeColor)
-//            applyActionModeTitle()
+            applyActionModeTitle()
         } else {
             selectedRecipes.add(currentRecipe)
             changeRecipeStyle(holder, R.color.cardBackgroundLightColor, R.color.colorPrimary)
-//            applyActionModeTitle()
+            applyActionModeTitle()
         }
     }
 
@@ -109,19 +111,19 @@ class FavoriteRecipesAdapter(
             ContextCompat.getColor(requireActivity, strokeColor)
     }
 
-//    private fun applyActionModeTitle() {
-//        when (selectedRecipes.size) {
-//            0 -> {
-//                mActionMode.finish()
-//            }
-//            1 -> {
-//                mActionMode.title = "${selectedRecipes.size} item selected"
-//            }
-//            else -> {
-//                mActionMode.title = "${selectedRecipes.size} items selected"
-//            }
-//        }
-//    }
+    private fun applyActionModeTitle() {
+        when (selectedRecipes.size) {
+            0 -> {
+                mActionMode.finish()
+            }
+            1 -> {
+                mActionMode.title = "${selectedRecipes.size} item selected"
+            }
+            else -> {
+                mActionMode.title = "${selectedRecipes.size} items selected"
+            }
+        }
+    }
 
     override fun getItemCount(): Int {
         return favoriteRecipes.size
@@ -129,7 +131,7 @@ class FavoriteRecipesAdapter(
 
     override fun onCreateActionMode(actionMode: ActionMode?, menu: Menu?): Boolean {
         actionMode?.menuInflater?.inflate(R.menu.favorites_contextual_menu, menu)
-//        mActionMode = actionMode!!
+        mActionMode = actionMode!!
         applyStatusBarColor(R.color.contextualStatusBarColor)
         return true
     }
