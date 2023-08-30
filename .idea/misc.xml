@@ -7,12 +7,13 @@
         <entry key="app/src/main/res/drawable/ic_leaf.xml" value="0.3787037037037037" />
         <entry key="app/src/main/res/drawable/ic_menu_book_24.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_restaurant.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_splash_screen_light.xml" value="0.5009259259259259" />
         <entry key="app/src/main/res/layout/activity_details.xml" value="0.3383152173913043" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="app/src/main/res/layout/favorite_recipes_row_layout.xml" value="0.33789260385005065" />
         <entry key="app/src/main/res/layout/fragment_certified_used_car.xml" value="0.401268115942029" />
         <entry key="app/src/main/res/layout/fragment_favorite_recipes.xml" value="0.37604166666666666" />
-        <entry key="app/src/main/res/layout/fragment_food_joke.xml" value="0.37604166666666666" />
+        <entry key="app/src/main/res/layout/fragment_food_joke.xml" value="0.335" />
         <entry key="app/src/main/res/layout/fragment_ingredients.xml" value="0.3383152173913043" />
         <entry key="app/src/main/res/layout/fragment_instructions.xml" value="0.3383152173913043" />
         <entry key="app/src/main/res/layout/fragment_overview.xml" value="0.3383152173913043" />
