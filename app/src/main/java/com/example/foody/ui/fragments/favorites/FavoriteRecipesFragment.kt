@@ -8,8 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.foody.R
-import com.example.foody.adapter.FavoriteRecipesAdapter
+import com.example.foody.adapters.FavoriteRecipesAdapter
 import com.example.foody.databinding.FragmentFavoriteRecipesBinding
 import com.example.foody.viewmodels.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -29,15 +28,15 @@ class FavoriteRecipesFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         _binding = FragmentFavoriteRecipesBinding.inflate(inflater, container, false)
-//        binding.lifecycleOwner = this
-//        binding.mainViewModel = mainViewModel
-//        binding.mAdapter = mAdapter
+        binding.lifecycleOwner = this
+        binding.mainViewModel = mainViewModel
+        binding.mAdapter = mAdapter
 
         setupRecyclerView(binding.favoriteRecipesRecyclerView)
 
-        mainViewModel.readFavoriteRecipes.observe(viewLifecycleOwner, { favoritesEntity ->
-            mAdapter.setData(favoritesEntity)
-        })
+//        mainViewModel.readFavoriteRecipes.observe(viewLifecycleOwner, { favoritesEntity ->
+//            mAdapter.setData(favoritesEntity)
+//        })
 
         return binding.root
     }

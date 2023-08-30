@@ -10,12 +10,11 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.navArgs
 import com.example.foody.R
-import com.example.foody.adapter.PagerAdapter
+import com.example.foody.adapters.PagerAdapter
 import com.example.foody.data.database.entities.FavoritesEntity
 import com.example.foody.ui.fragments.ingredients.IngredientsFragment
 import com.example.foody.ui.fragments.instructions.InstructionsFragment
 import com.example.foody.ui.fragments.overview.OverviewFragment
-import com.example.foody.util.Constants
 import com.example.foody.util.Constants.Companion.RECIPE_RESULT_KEY
 import com.example.foody.viewmodels.MainViewModel
 import com.google.android.material.snackbar.Snackbar

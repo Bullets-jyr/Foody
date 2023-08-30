@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.foody.R
-import com.example.foody.adapter.IngredientsAdapter
+import com.example.foody.adapters.IngredientsAdapter
 import com.example.foody.models.Result
 import com.example.foody.util.Constants.Companion.RECIPE_RESULT_KEY
 import kotlinx.android.synthetic.main.fragment_ingredients.view.*
