@@ -78,7 +78,7 @@ class FoodJokeFragment : Fragment() {
 //        return super.onOptionsItemSelected(item)
 //    }
 
-    private fun loadDataFromCache(){
+    private fun loadDataFromCache() {
         lifecycleScope.launch {
             mainViewModel.readFoodJoke.observe(viewLifecycleOwner, { database->
                 if (!database.isNullOrEmpty() && database != null) {
