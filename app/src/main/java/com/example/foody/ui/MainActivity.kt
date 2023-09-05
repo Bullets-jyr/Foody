@@ -23,6 +23,7 @@ class MainActivity : AppCompatActivity() {
         setTheme(R.style.AppTheme)
         setContentView(binding.root)
 
+        // For BottomNavigation
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.navHostFragment) as NavHostFragment
 
 //        navController = findNavController(R.id.navHostFragment)
@@ -39,6 +40,7 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
     }
 
+    // For BottomNavigation
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp() || super.onSupportNavigateUp()
     }

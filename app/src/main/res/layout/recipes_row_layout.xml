@@ -38,9 +38,9 @@
 
                 <ImageView
                     android:id="@+id/recipe_imageView"
+                    loadImageFromUrl="@{result.image}"
                     android:layout_width="200dp"
                     android:layout_height="0dp"
-                    loadImageFromUrl="@{result.image}"
                     android:scaleType="centerCrop"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -64,20 +64,22 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toEndOf="@+id/recipe_imageView"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="Textview" />
 
                 <TextView
                     android:id="@+id/description_textView"
+                    parseHtml="@{result.summary}"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
                     android:ellipsize="end"
                     android:maxLines="3"
-                    parseHtml="@{result.summary}"
                     android:textColor="@color/descriptionColor"
                     app:layout_constraintEnd_toEndOf="@+id/title_textView"
                     app:layout_constraintStart_toStartOf="@+id/title_textView"
-                    app:layout_constraintTop_toBottomOf="@+id/title_textView" />
+                    app:layout_constraintTop_toBottomOf="@+id/title_textView"
+                    tools:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book." />
 
                 <ImageView
                     android:id="@+id/heart_imageView"
